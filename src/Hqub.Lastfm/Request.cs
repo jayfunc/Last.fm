@@ -174,6 +174,12 @@ namespace Hqub.Lastfm
 
         private XDocument GetXDocument(Stream stream)
         {
+            // Reference https://stackoverflow.com/questions/10125810/root-element-is-missing
+            if (stream.Position > 0)
+            {
+                stream.Position = 0;
+            }
+
             TextReader treader = new StreamReader(stream);
 
             var settings = new XmlReaderSettings();
